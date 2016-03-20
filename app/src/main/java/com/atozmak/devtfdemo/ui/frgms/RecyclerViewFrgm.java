@@ -27,7 +27,7 @@ public abstract class RecyclerViewFrgm<T>
     protected SwipeRefreshLayout mSwipeRefreshLayout;
 
     protected AutoLoadRecyclerView mRecyclerView;
-    final protected List<T> mDataset = new ArrayList<>();
+    final protected List<T> mDataSet = new ArrayList<>();
 
     @Nullable
     @Override

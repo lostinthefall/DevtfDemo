@@ -8,9 +8,12 @@ import android.support.v7.widget.RecyclerView;
 
 import android.widget.TextView;
 
+import com.android.volley.RequestQueue;
 import com.atozmak.devtfdemo.R;
 import com.atozmak.devtfdemo.adapters.MenuAdapter;
+import com.atozmak.devtfdemo.entities.Article;
 import com.atozmak.devtfdemo.entities.MenuItem;
+import com.atozmak.devtfdemo.net.mgr.RequestQueueMgr;
 import com.atozmak.devtfdemo.ui.frgms.ArticlesFrgm;
 import com.atozmak.devtfdemo.listeners.OnItemClickListener;
 import com.atozmak.devtfdemo.widgets.CircleImageView;
@@ -90,9 +93,40 @@ public class ArticlesActivity extends BaseActivity //implements LogoutInterface
         mDrawerLayout.closeDrawers();
         switch (item.iconResId) {
             case R.drawable.home:
-                mArticlesFrgm.
-
-
+                mArticlesFrgm.setArticleCategory(Article.ALL);
+                mArticlesFrgm.fetchDatas();
+                replaceFrgm(mArticlesFrgm);
+                break;
+            case R.drawable.android_icon:
+                replaceFrgm(mArticlesFrgm);
+                mArticlesFrgm.setArticleCategory(Article.ANDROID);
+                mArticlesFrgm.fetchDatas();
+                break;
+            case R.drawable.ios_icon:
+                replaceFrgm(mArticlesFrgm);
+                mArticlesFrgm.setArticleCategory(Article.IOS);
+                mArticlesFrgm.fetchDatas();
+                break;
+            default:
+                break;
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RequestQueueMgr.getmRequestQueue().stop();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initUserProfile();
+    }
+
+    private void initUserProfile() {
+        //空
+    }
+
+
 }
